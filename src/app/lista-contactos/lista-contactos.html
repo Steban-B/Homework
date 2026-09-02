@@ -1,0 +1,13 @@
+@if (contacts.length === 0) {
+  <p>No hay contactos todavía</p>
+} 
+@else {
+  <ul>
+    @for (contact of contacts; track contact.id) {
+      <li>
+        {{ contact.name }} - {{ contact.phone }}
+        <button (click)="eliminar(contact.id)">Eliminar</button>
+      </li>
+    }
+  </ul>
+}

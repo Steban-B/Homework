@@ -1,0 +1,11 @@
+@if (loading()) {
+  <p>Cargando contactos...</p>
+} 
+@else {
+  <h1>Mis contactos</h1>
+  <app-lista-contactos
+    [contacts]="contacts()"
+    (deleteContact)="deleteContact($event)"
+  ></app-lista-contactos>
+  <app-nuevo-contacto (newContact)="addContact($event)"></app-nuevo-contacto>
+}
