@@ -1,0 +1,13 @@
+<div class="form-container">
+  <label>
+    Nombre:
+    <input placeholder="Nombre" [value]="name()" (change)="changeName($event)" />
+  </label>
+
+  <label>
+    Teléfono:
+    <input placeholder="Teléfono" [value]="phone()" (change)="changePhone($event)" />
+  </label>
+
+  <button (click)="submitContact()">Agregar contacto</button>
+</div>
