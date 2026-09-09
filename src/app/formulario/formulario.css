@@ -1,0 +1,17 @@
+.formulario {
+  margin-bottom: 20px;
+}
+
+.campo {
+  margin-bottom: 10px;
+}
+
+.label {
+  display: block;
+  width: 70px;
+}
+
+button {
+  padding: 8px 16px;
+  cursor: pointer;
+}

@@ -1,0 +1,30 @@
+<div class="lista">
+  <h2>Lista de Estudiantes</h2>
+
+  @if (estudiantes.length === 0) {
+    <p>No hay estudiantes registrados.</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Código</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (estudiante of estudiantes; track estudiante.codigo) {
+          <tr>
+            <td>{{ estudiante.nombre }}</td>
+            <td>{{ estudiante.edad }}</td>
+            <td>{{ estudiante.codigo }}</td>
+            <td>
+              <button (click)="eliminar(estudiante.codigo)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
