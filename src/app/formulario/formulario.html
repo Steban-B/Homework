@@ -1,0 +1,8 @@
+<div class="formulario">
+  <h2>Nuevo Turno</h2>
+  <form (ngSubmit)="registrar()">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" type="text" [(ngModel)]="nombre" name="nombre" placeholder="Ej: María">
+    <button type="submit">Agregar Turno</button>
+  </form>
+</div>

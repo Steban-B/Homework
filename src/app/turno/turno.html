@@ -1,0 +1,18 @@
+<div class="turno">
+  <h2>Turno Actual</h2>
+
+  @if (turnoActual) {
+    <p class="mensaje">Atendiendo a: {{ turnoActual.nombre }} (Turno #{{ turnoActual.numero }})</p>
+  } @else {
+    <p class="mensaje">No hay turnos registrados.</p>
+  }
+
+  <button (click)="avanzar()">Siguiente Turno</button>
+
+  <h3>Todos los turnos</h3>
+  <ul>
+    @for (turno of turnos; track turno.numero) {
+      <li>#{{ turno.numero }} - {{ turno.nombre }}</li>
+    }
+  </ul>
+</div>
