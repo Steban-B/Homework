@@ -1,0 +1,14 @@
+<div class="tarjeta">
+  <p class="info">Lista enlazada simple · {{ listaCanciones.tamano() }} canciones</p>
+
+  <div class="valor-actual">
+    <p>{{ nodoActual?.valor }}</p>
+  </div>
+
+  <div class="botones">
+    <button (click)="reiniciar()">Reiniciar</button>
+    <button (click)="irSiguiente()" [disabled]="!nodoActual?.siguiente">Siguiente</button>
+  </div>
+
+  <p class="recorrido">Recorrido: {{ listaCanciones.imprimir().join(' -> ') }} -> null</p>
+</div>

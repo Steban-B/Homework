@@ -1,0 +1,12 @@
+<div class="tarjeta">
+  <p class="info">Lista doblemente enlazada · {{ listaPaginas.longitud }} páginas</p>
+
+  <div class="valor-actual">
+    <p>{{ nodoActual?.valor }}</p>
+  </div>
+
+  <div class="botones">
+    <button (click)="irAtras()" [disabled]="!nodoActual?.anterior">Atrás</button>
+    <button (click)="irAdelante()" [disabled]="!nodoActual?.siguiente">Adelante</button>
+  </div>
+</div>
