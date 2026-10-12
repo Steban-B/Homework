@@ -1,12 +1,10 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { Arbol } from './componentes/arbol/arbol';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [Arbol],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
-export class App {
-  protected readonly title = signal('challenge-06-btree');
-}
+export class App {}

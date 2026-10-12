@@ -1,0 +1,20 @@
+<app-formulario-numero
+  (buscar)="buscarNumero($event)"
+  (insertar)="insertarNumero($event)"
+  (cargarEjemplo)="cargarEjemplo()"
+  (verOrdenes)="alternarOrdenes()"
+/>
+
+@if (mensaje()) {
+  <p>{{ mensaje() }}</p>
+}
+
+@if (mostrarOrdenes()) {
+  <div>
+    <p><strong>Preorden:</strong> {{ preorden().join(', ') }}</p>
+    <p><strong>Inorden:</strong> {{ inorden().join(', ') }}</p>
+    <p><strong>Postorden:</strong> {{ postorden().join(', ') }}</p>
+  </div>
+}
+
+<app-visor-arbol [raiz]="raiz()" [resaltado]="resaltado()" />

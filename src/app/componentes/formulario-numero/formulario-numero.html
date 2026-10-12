@@ -1,0 +1,14 @@
+<div class="fila">
+  <input #buscarEntrada type="number" placeholder="Buscar número" (keydown.enter)="alBuscar(buscarEntrada)" />
+  <button type="button" (click)="alBuscar(buscarEntrada)">Buscar</button>
+</div>
+
+<div class="fila">
+  <input #insertarEntrada type="number" placeholder="Insertar número" (keydown.enter)="alInsertar(insertarEntrada)" />
+  <button type="button" (click)="alInsertar(insertarEntrada)">Insertar</button>
+</div>
+
+<div class="fila">
+  <button type="button" (click)="cargarEjemplo.emit()">Cargar ejemplo</button>
+  <button type="button" (click)="verOrdenes.emit()">Ver órdenes</button>
+</div>
