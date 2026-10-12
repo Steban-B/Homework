@@ -1,12 +1,10 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { Panel } from './componentes/panel';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [Panel],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
-export class App {
-  protected readonly title = signal('challenge-06-ntree');
-}
+export class App {}
