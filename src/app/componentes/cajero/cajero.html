@@ -1,0 +1,10 @@
+<app-formulario-persona (personaCreada)="agregarPersona($event)" />
+
+<app-lista-personas
+  [personas]="personas()"
+  [personaConsultada]="personaConsultada()"
+  [mensaje]="mensaje()"
+  (atender)="atenderPersona()"
+  (verPrimera)="verPrimeraPersona()"
+  (vaciar)="vaciarCola()"
+/>

@@ -1,12 +1,10 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { Cajero } from './componentes/cajero/cajero';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [Cajero],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
-export class App {
-  protected readonly title = signal('challenge-05-atm');
-}
+export class App {}

@@ -1,0 +1,21 @@
+<form [formGroup]="formulario" (ngSubmit)="agregar()" class="formulario">
+  <h2>Agregar persona</h2>
+
+  <div class="campo">
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" formControlName="nombre" />
+    @if (formulario.controls.nombre.touched && formulario.controls.nombre.invalid) {
+      <small class="error">El nombre es obligatorio.</small>
+    }
+  </div>
+
+  <div class="campo">
+    <label for="monto">Monto</label>
+    <input id="monto" type="number" formControlName="monto" />
+    @if (formulario.controls.monto.touched && formulario.controls.monto.invalid) {
+      <small class="error">El monto debe ser mayor a 0.</small>
+    }
+  </div>
+
+  <button type="submit">Agregar a la cola</button>
+</form>

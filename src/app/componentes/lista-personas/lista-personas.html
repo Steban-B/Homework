@@ -1,0 +1,35 @@
+<section class="lista">
+  <h2>Cola del cajero ({{ personas().length }})</h2>
+
+  <div class="acciones">
+    <button type="button" (click)="verPrimera.emit()">Ver primero</button>
+    <button type="button" class="peligro" (click)="atender.emit()">Atender</button>
+    <button type="button" class="secundario" (click)="vaciar.emit()">Vaciar</button>
+  </div>
+
+  @if (mensaje()) {
+    <div class="resultado">
+      <strong>{{ mensaje() }}</strong>
+      @if (personaConsultada(); as persona) {
+        <p>{{ persona.nombre }} - {{ persona.monto | currency: 'USD' : 'symbol' : '1.0-0' }}</p>
+      }
+    </div>
+  }
+
+  @if (personas().length === 0) {
+    <p class="vacia">La cola está vacía.</p>
+  } @else {
+    <ol class="cola">
+      @for (persona of personas(); track persona.fechaLlegada.getTime() + persona.nombre; let primero = $first) {
+        <li class="persona" [class.frente]="primero">
+          @if (primero) {
+            <span class="etiqueta">Siguiente</span>
+          }
+          <h3>{{ persona.nombre }}</h3>
+          <p><strong>Monto:</strong> {{ persona.monto | currency: 'USD' : 'symbol' : '1.0-0' }}</p>
+          <p><strong>Llegada:</strong> {{ persona.fechaLlegada | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+        </li>
+      }
+    </ol>
+  }
+</section>
