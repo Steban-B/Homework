@@ -1,0 +1,37 @@
+<form [formGroup]="formulario" (ngSubmit)="agregar()" class="formulario">
+  <h2>Agregar libro</h2>
+
+  <div class="campo">
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" formControlName="nombre" />
+    @if (formulario.controls.nombre.touched && formulario.controls.nombre.invalid) {
+      <small class="error">El nombre es obligatorio.</small>
+    }
+  </div>
+
+  <div class="campo">
+    <label for="isbn">ISBN</label>
+    <input id="isbn" type="text" formControlName="isbn" />
+    @if (formulario.controls.isbn.touched && formulario.controls.isbn.invalid) {
+      <small class="error">El ISBN es obligatorio (mínimo 10 caracteres).</small>
+    }
+  </div>
+
+  <div class="campo">
+    <label for="autor">Autor</label>
+    <input id="autor" type="text" formControlName="autor" />
+    @if (formulario.controls.autor.touched && formulario.controls.autor.invalid) {
+      <small class="error">El autor es obligatorio.</small>
+    }
+  </div>
+
+  <div class="campo">
+    <label for="editorial">Editorial</label>
+    <input id="editorial" type="text" formControlName="editorial" />
+    @if (formulario.controls.editorial.touched && formulario.controls.editorial.invalid) {
+      <small class="error">La editorial es obligatoria.</small>
+    }
+  </div>
+
+  <button type="submit">Agregar a la pila</button>
+</form>

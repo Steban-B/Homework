@@ -1,0 +1,35 @@
+<section class="lista">
+  <h2>Pila de libros ({{ libros().length }})</h2>
+
+  <div class="acciones">
+  <button type="button" (click)="verSuperior()">Ver peek</button>
+  <button type="button" class="peligro" (click)="quitarSuperior()">Quitar último</button>
+</div>
+
+  @if (mensaje()) {
+    <div class="resultado">
+      <strong>{{ mensaje() }}</strong>
+      @if (libroConsultado(); as libro) {
+        <p>{{ libro.nombre }} - {{ libro.autor }}</p>
+      }
+    </div>
+  }
+
+  @if (libros().length === 0) {
+    <p class="vacia">La pila está vacía.</p>
+  } @else {
+    <ul class="pila">
+      @for (libro of libros().slice().reverse(); track libro.isbn + $index; let primero = $first) {
+        <li class="libro" [class.tope]="primero">
+          @if (primero) {
+            <span class="etiqueta">Ultimo</span>
+          }
+          <h3>{{ libro.nombre }}</h3>
+          <p><strong>ISBN:</strong> {{ libro.isbn }}</p>
+          <p><strong>Autor:</strong> {{ libro.autor }}</p>
+          <p><strong>Editorial:</strong> {{ libro.editorial }}</p>
+        </li>
+      }
+    </ul>
+  }
+</section>

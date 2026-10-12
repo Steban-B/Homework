@@ -1,0 +1,67 @@
+.lista {
+  width: 340px;
+  margin-top: 24px;
+}
+
+.lista h2 {
+  text-align: center;
+}
+
+.acciones {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.resultado {
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.resultado p {
+  margin: 4px 0 0;
+}
+
+.pila {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.libro {
+  position: relative;
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+
+.libro h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  padding-right: 52px;
+}
+
+.libro p {
+  margin: 2px 0;
+}
+
+.libro.tope {
+  border: 2px solid black;
+}
+
+.etiqueta {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.vacia {
+  text-align: center;
+}

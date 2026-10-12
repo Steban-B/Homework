@@ -1,12 +1,11 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { FormularioLibro } from './formulario/formulario-libro';
+import { ListaLibros } from './lista-libros/lista-libros';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [FormularioLibro, ListaLibros],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
-export class App {
-  protected readonly title = signal('challenge-04-book-stack');
-}
+export class App {}
