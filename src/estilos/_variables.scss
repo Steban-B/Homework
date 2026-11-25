@@ -1,0 +1,25 @@
+$color-fondo: #121212;
+$color-tarjeta: #181818;
+$color-tarjeta-hover: #282828;
+$color-primario: #1db954;
+$color-texto: #ffffff;
+$color-texto-suave: #b3b3b3;
+$color-error: #e5534b;
+
+$fuente: 'Segoe UI', Roboto, Arial, sans-serif;
+$espacio: 8px;
+$radio: 12px;
+$sombra: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+$generos: (
+  'trap': #a970ff,
+  'drill': #ff8a3d,
+  'reggaeton': #1db954,
+);
+
+$medallas: (#f5c518, #c0c0c0, #cd7f32);
+
+$pantallas: (
+  'tablet': 1000px,
+  'movil': 650px,
+);

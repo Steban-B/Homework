@@ -1,0 +1,57 @@
+@use 'sass:color';
+@use 'sass:map';
+@use 'variables' as *;
+@use 'funciones' as *;
+
+@mixin flex($direccion: row, $alinear: center, $justificar: flex-start, $gap: espacio(1)) {
+  display: flex;
+  flex-direction: $direccion;
+  align-items: $alinear;
+  justify-content: $justificar;
+  gap: $gap;
+}
+
+@mixin tarjeta {
+  background: $color-tarjeta;
+  border-radius: $radio;
+  padding: espacio(3);
+  box-shadow: $sombra;
+}
+
+@mixin boton($color: $color-primario) {
+  background: $color;
+  color: #000;
+  border: none;
+  border-radius: 500px;
+  padding: espacio(1.25) espacio(3);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+
+  &:hover {
+    background: color.adjust($color, $lightness: 8%);
+    transform: scale(1.04);
+  }
+}
+
+@mixin fila-hover {
+  border-radius: $radio * 0.5;
+  transition: background 0.15s;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-tarjeta-hover;
+  }
+}
+
+@mixin texto-cortado {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin pantalla($nombre) {
+  @media (max-width: map.get($pantallas, $nombre)) {
+    @content;
+  }
+}

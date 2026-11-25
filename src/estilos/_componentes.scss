@@ -1,0 +1,205 @@
+@use 'sass:color';
+@use 'sass:list';
+@use 'variables' as *;
+@use 'funciones' as *;
+@use 'mixins' as *;
+
+.tarjeta {
+  @include tarjeta;
+  @include flex(column, stretch, flex-start, espacio(2));
+
+  &__cabecera {
+    @include flex(row, center, space-between);
+  }
+
+  &__titulo {
+    font-size: rem(20px);
+  }
+}
+
+.subtitulo {
+  font-size: rem(14px);
+  color: $color-texto-suave;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.formulario {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: espacio(1);
+
+  &__completo {
+    grid-column: 1 / -1;
+  }
+
+  .campo {
+    padding: espacio(1) espacio(1.25);
+    font-size: rem(14px);
+    min-width: 0;
+  }
+}
+
+.campo {
+  background: $color-tarjeta-hover;
+  color: $color-texto;
+  border: 2px solid transparent;
+  border-radius: $radio * 0.5;
+  padding: espacio(1.5);
+  font-size: rem(15px);
+  outline: none;
+  transition: border-color 0.15s;
+
+  &:focus {
+    border-color: $color-primario;
+  }
+
+  &--pequeno {
+    padding: espacio(0.75) espacio(1);
+    font-size: rem(13px);
+  }
+}
+
+.boton {
+  @include boton;
+
+  &--pequeno {
+    padding: espacio(0.75) espacio(1.5);
+    font-size: rem(12px);
+  }
+
+  &--peligro {
+    @include boton($color-error);
+  }
+}
+
+.estado {
+  font-size: rem(14px);
+  padding: espacio(1) espacio(1.5);
+  border-radius: $radio * 0.5;
+
+  &--ok {
+    color: $color-primario;
+    background: color.adjust($color-primario, $alpha: -0.85);
+  }
+
+  &--error {
+    color: $color-error;
+    background: color.adjust($color-error, $alpha: -0.85);
+  }
+}
+
+.lista {
+  list-style: none;
+  @include flex(column, stretch, flex-start, espacio(0.5));
+
+  &__item {
+    @include flex(row, center, flex-start, espacio(1.5));
+    @include fila-hover;
+    padding: espacio(1.25) espacio(1.5);
+
+    span:first-child {
+      flex: 1;
+      font-weight: 600;
+      @include texto-cortado;
+    }
+
+    small {
+      color: $color-texto-suave;
+    }
+  }
+
+  &__vacio {
+    color: $color-texto-suave;
+    font-size: rem(14px);
+  }
+}
+
+.lista__item--sugerencia {
+  background: linear-gradient(90deg, color.adjust($color-primario, $alpha: -0.88), transparent);
+  border: 1px solid color.adjust($color-primario, $alpha: -0.75);
+
+  &:hover {
+    background: linear-gradient(90deg, color.adjust($color-primario, $alpha: -0.75), $color-tarjeta-hover);
+    border-color: color.adjust($color-primario, $alpha: -0.5);
+  }
+}
+
+.ranking {
+  list-style: none;
+  @include flex(column, stretch, flex-start, espacio(1));
+
+  &__item {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    align-items: center;
+    gap: espacio(1.5);
+    padding: espacio(1);
+    @include fila-hover;
+  }
+
+  &__posicion {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: $color-tarjeta-hover;
+    font-weight: 800;
+    @include flex(row, center, center);
+  }
+
+  &__info {
+    @include flex(column, flex-start, center, 2px);
+    min-width: 0;
+
+    strong {
+      @include texto-cortado;
+      max-width: 100%;
+    }
+
+    small {
+      color: $color-texto-suave;
+    }
+  }
+
+  &__numero {
+    color: $color-texto-suave;
+    font-size: rem(13px);
+  }
+}
+
+@for $i from 1 through list.length($medallas) {
+  .posicion-#{$i} .ranking__posicion {
+    background: list.nth($medallas, $i);
+    color: #000;
+  }
+}
+
+.seleccionada {
+  @include flex(row, center, space-between, espacio(2));
+  background: linear-gradient(135deg, color.adjust($color-primario, $alpha: -0.7), $color-tarjeta-hover);
+  border-radius: $radio;
+  padding: espacio(2);
+
+  &__info {
+    @include flex(column, flex-start, center, 4px);
+
+    small {
+      color: $color-texto-suave;
+    }
+  }
+}
+
+.etiqueta {
+  font-size: rem(11px);
+  font-weight: 700;
+  padding: 2px espacio(1);
+  border-radius: 500px;
+  border: 1px solid currentColor;
+}
+
+@each $nombre, $color in $generos {
+  .etiqueta--#{$nombre} {
+    color: $color;
+    background: color.adjust($color, $alpha: -0.85);
+  }
+}
