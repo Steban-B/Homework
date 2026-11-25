@@ -11,13 +11,11 @@ export class MaxHeap {
     [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
   }
 
-  // insertar
   insertar(cancion: Cancion): void {
     this.heap.push(cancion);
     this.subir(this.heap.length - 1);
   }
 
-  // sacar la mas escuchada
   extraerMax(): Cancion | null {
     if (this.estaVacio()) return null;
 
@@ -47,7 +45,7 @@ export class MaxHeap {
     return [...this.heap];
   }
 
-  // top k sin dañar el heap original
+  // top k mas escuchadas usando una copia para no dañar el heap
   topK(k: number): Cancion[] {
     const copia = new MaxHeap();
     copia.heap = [...this.heap];
@@ -59,8 +57,8 @@ export class MaxHeap {
     return top;
   }
 
-  // sumar reproducciones
-    reproducir(id: number, cantidad = 1): void {
+  // suma reproducciones
+  reproducir(id: number, cantidad = 1): void {
     const i = this.heap.findIndex(c => c.id === id);
     if (i === -1) return;
 

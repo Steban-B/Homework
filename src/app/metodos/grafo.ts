@@ -4,14 +4,12 @@ export class Grafo {
   private nodos = new Map<number, Cancion>();
   private listaAdyacencia = new Map<number, number[]>();
 
-  // agregar nodo
   agregarNodo(cancion: Cancion): void {
     if (this.nodos.has(cancion.id)) return;
     this.nodos.set(cancion.id, cancion);
     this.listaAdyacencia.set(cancion.id, []);
   }
 
-  // agregar arista en los dos sentidos
   agregarArista(id1: number, id2: number): void {
     if (id1 === id2) return;
     if (!this.nodos.has(id1) || !this.nodos.has(id2)) return;

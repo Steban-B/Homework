@@ -13,7 +13,6 @@ export class Trie {
     return texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
   }
 
-  // insertar
   insertar(cancion: Cancion): void {
     const palabra = this.normalizar(cancion.titulo);
     let actual = this.raiz;
@@ -38,7 +37,6 @@ export class Trie {
     return actual;
   }
 
-  // buscar
   buscar(titulo: string): boolean {
     const nodo = this.buscarNodo(this.normalizar(titulo));
     return nodo !== null && nodo.esFinDePalabra;
@@ -49,7 +47,6 @@ export class Trie {
     return nodo && nodo.esFinDePalabra ? nodo.cancion : null;
   }
 
-  // sugerencias por prefijo
   sugerencias(prefijo: string, limite = 5): Cancion[] {
     const texto = this.normalizar(prefijo);
     if (!texto) return [];
