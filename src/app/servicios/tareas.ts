@@ -1,7 +1,7 @@
 import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { hookTareas } from '../hooks/tareas';
 import { Filtro } from '../modelos/tarea';
-import { AutenticacionServicio } from './aut.servicio';
+import { AutenticacionServicio } from './autenticacion';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,6 @@ export class TareasServicio {
   });
 
   constructor() {
-    // depende del uid y no del usuario completo, asi no se reconecta cada vez que se refresca el token
     effect((alLimpiar) => {
       const uid = this.autenticacion.uid();
 

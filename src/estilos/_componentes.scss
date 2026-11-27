@@ -3,8 +3,6 @@
 @use 'funciones' as *;
 @use 'mixins' as *;
 
-// ---------- generales ----------
-
 .tarjeta {
   @include tarjeta;
   @include flex(column, stretch, flex-start, espacio(2.5));
@@ -54,8 +52,6 @@
     text-decoration: underline;
   }
 }
-
-// ---------- formularios ----------
 
 .etiqueta-campo {
   @include flex(column, stretch, flex-start, espacio(0.75));
@@ -150,8 +146,6 @@
     @include suave($color-error, 0.9);
   }
 }
-
-// ---------- tareas ----------
 
 .resumen {
   display: grid;
@@ -274,8 +268,6 @@
     text-decoration: line-through;
   }
 }
-
-// ---------- perfil ----------
 
 .foto {
   @include flex(row, center, center);

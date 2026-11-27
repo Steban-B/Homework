@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { AutenticacionServicio } from '../servicios/aut.servicio';
+import { AutenticacionServicio } from '../servicios/autenticacion';
 import { mensajeDeError } from '../hooks/autenticacion';
 
 @Component({

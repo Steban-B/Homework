@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { AutenticacionServicio } from '../servicios/aut.servicio';
+import { AutenticacionServicio } from '../servicios/autenticacion';
 import { FotoPerfil } from './foto.perfil';
 
 @Component({

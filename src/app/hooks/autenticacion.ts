@@ -26,8 +26,6 @@ export function mensajeDeError(error: unknown): string {
 export function hookAutenticacion() {
   const usuario = signal<User | null>(null);
 
-  // onAuthStateChange avisa de una vez con la sesion guardada (INITIAL_SESSION),
-  // asi los guards pueden esperar a que se sepa si hay usuario o no
   const listo = new Promise<void>((resolver) => {
     supabase.auth.onAuthStateChange((_evento, sesion) => {
       usuario.set(sesion?.user ?? null);
@@ -35,7 +33,6 @@ export function hookAutenticacion() {
     });
   });
 
-  // como la confirmacion de correo esta apagada, al registrarse queda con la sesion abierta
   async function registrar(correo: string, clave: string): Promise<void> {
     const { error } = await supabase.auth.signUp({ email: correo, password: clave });
     if (error) throw error;

@@ -6,7 +6,6 @@ const BUCKET = 'avatars';
 export function hookAvatar() {
   const subiendo = signal(false);
 
-  // la ruta empieza con el uid porque las politicas del bucket solo dejan escribir en tu carpeta
   async function subir(uid: string, archivo: File): Promise<string> {
     const ruta = `${uid}/avatar`;
     subiendo.set(true);
@@ -19,7 +18,6 @@ export function hookAvatar() {
 
       const { data } = supabase.storage.from(BUCKET).getPublicUrl(ruta);
 
-      // el ?v= es para que el navegador no muestre la foto vieja guardada en cache
       const url = `${data.publicUrl}?v=${Date.now()}`;
 
       const { error: errorUsuario } = await supabase.auth.updateUser({ data: { avatar_url: url } });

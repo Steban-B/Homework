@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { AutenticacionServicio } from '../servicios/aut.servicio';
-import { AvatarServicio } from '../servicios/avatar.servicio';
-import { TareasServicio } from '../servicios/tareas.servicio';
+import { AutenticacionServicio } from '../servicios/autenticacion';
+import { AvatarServicio } from '../servicios/avatar';
+import { TareasServicio } from '../servicios/tareas';
 import { FotoPerfil } from './foto.perfil';
 
 const TAMANO_MAXIMO = 2 * 1024 * 1024;

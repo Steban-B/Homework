@@ -6,7 +6,6 @@ export function hookTareas() {
   const tareas = signal<Tarea[]>([]);
   const cargando = signal(false);
 
-  // las mas nuevas primero, el id es identity asi que sirve para ordenar
   const ordenar = (lista: Tarea[]) => [...lista].sort((a, b) => b.id - a.id);
 
   function ponerTarea(tarea: Tarea): void {
@@ -29,7 +28,6 @@ export function hookTareas() {
     tareas.set(data as Tarea[]);
   }
 
-  // carga la lista y se queda escuchando los cambios de la tabla en tiempo real
   function escuchar(uid: string): () => void {
     cargar();
 
@@ -45,7 +43,6 @@ export function hookTareas() {
         { event: 'UPDATE', schema: 'public', table: 'tareas', filter: `user_id=eq.${uid}` },
         (cambio) => ponerTarea(cambio.new),
       )
-      // supabase no deja filtrar los DELETE, solo llega el id y se quita si esta en la lista
       .on<Tarea>('postgres_changes', { event: 'DELETE', schema: 'public', table: 'tareas' }, (cambio) => {
         if (cambio.old.id) quitarTarea(cambio.old.id);
       })
@@ -56,7 +53,6 @@ export function hookTareas() {
     };
   }
 
-  // user_id no se manda, la base lo pone con auth.uid()
   async function agregar(titulo: string): Promise<void> {
     const { data, error } = await supabase.from('tareas').insert({ titulo }).select().single();
     if (error) throw error;

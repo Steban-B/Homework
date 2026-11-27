@@ -5,7 +5,6 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 
-// para que las fechas salgan en español
 registerLocaleData(localeEs);
 
 export const appConfig: ApplicationConfig = {

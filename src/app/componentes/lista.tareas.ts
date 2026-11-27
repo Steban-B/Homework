@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { TareasServicio } from '../servicios/tareas.servicio';
+import { TareasServicio } from '../servicios/tareas';
 import { Filtro } from '../modelos/tarea';
 import { FormularioTarea } from './formulario';
 import { ItemTarea } from './item.tarea';
