@@ -1,0 +1,66 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'funciones' as *;
+
+@mixin flex($direccion: row, $alinear: center, $justificar: flex-start, $gap: espacio(1)) {
+  display: flex;
+  flex-direction: $direccion;
+  align-items: $alinear;
+  justify-content: $justificar;
+  gap: $gap;
+}
+
+@mixin tarjeta {
+  background: $color-tarjeta;
+  border: 1px solid $color-borde;
+  border-radius: $radio;
+  padding: espacio(3);
+  box-shadow: $sombra;
+}
+
+@mixin boton($color: $color-primario) {
+  background: $color;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: $radio * 0.6;
+  padding: espacio(1.25) espacio(2.5);
+  font-family: inherit;
+  font-size: rem(14px);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+
+  &:hover:not(:disabled) {
+    background: color.adjust($color, $lightness: -8%);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin fila-hover {
+  border-radius: $radio * 0.6;
+  transition: background 0.15s;
+
+  &:hover {
+    background: $color-tarjeta-hover;
+  }
+}
+
+@mixin texto-cortado {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin suave($color, $opacidad: 0.85) {
+  color: $color;
+  background: color.adjust($color, $alpha: -$opacidad);
+}

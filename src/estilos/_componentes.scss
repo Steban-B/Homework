@@ -1,0 +1,345 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'funciones' as *;
+@use 'mixins' as *;
+
+// ---------- generales ----------
+
+.tarjeta {
+  @include tarjeta;
+  @include flex(column, stretch, flex-start, espacio(2.5));
+
+  &--angosta {
+    max-width: 420px;
+    margin: espacio(4) auto 0;
+  }
+
+  &__cabecera {
+    @include flex(row, center, space-between);
+  }
+
+  &__titulo {
+    font-size: rem(24px);
+    font-weight: 800;
+  }
+}
+
+.pila {
+  @include flex(column, stretch, flex-start, espacio(1.5));
+}
+
+.subtitulo {
+  font-size: rem(12px);
+  color: $color-texto-suave;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.texto-suave {
+  color: $color-texto-suave;
+  font-size: rem(14px);
+  margin-top: espacio(0.5);
+}
+
+.texto-centro {
+  text-align: center;
+}
+
+.enlace {
+  color: $color-primario;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// ---------- formularios ----------
+
+.etiqueta-campo {
+  @include flex(column, stretch, flex-start, espacio(0.75));
+  font-size: rem(13px);
+  font-weight: 600;
+  color: $color-texto-suave;
+}
+
+.campo {
+  width: 100%;
+  background: $color-fondo;
+  color: $color-texto;
+  border: 1px solid $color-borde;
+  border-radius: $radio * 0.6;
+  padding: espacio(1.25) espacio(1.5);
+  font-family: inherit;
+  font-size: rem(15px);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &::placeholder {
+    color: color.adjust($color-texto-suave, $lightness: 20%);
+  }
+
+  &:focus {
+    border-color: $color-primario;
+    box-shadow: 0 0 0 3px color.adjust($color-primario, $alpha: -0.85);
+  }
+
+  &--pequeno {
+    padding: espacio(0.75) espacio(1);
+    font-size: rem(14px);
+  }
+}
+
+.boton {
+  @include boton;
+  @include flex(row, center, center, espacio(0.75));
+  white-space: nowrap;
+
+  &--ancho {
+    width: 100%;
+  }
+
+  &--pequeno {
+    padding: espacio(0.75) espacio(1.5);
+    font-size: rem(12px);
+  }
+
+  &--borde {
+    background: $color-tarjeta;
+    color: $color-texto;
+    border-color: $color-borde;
+
+    &:hover:not(:disabled) {
+      background: $color-tarjeta-hover;
+    }
+  }
+}
+
+.boton-icono {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: $radio * 0.5;
+  background: transparent;
+  color: $color-texto-suave;
+  font-size: rem(15px);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    background: $color-borde;
+    color: $color-texto;
+  }
+
+  &--peligro:hover {
+    @include suave($color-error, 0.9);
+  }
+}
+
+.estado {
+  font-size: rem(14px);
+  padding: espacio(1) espacio(1.5);
+  border-radius: $radio * 0.5;
+
+  &--ok {
+    @include suave($color-exito, 0.9);
+  }
+
+  &--error {
+    @include suave($color-error, 0.9);
+  }
+}
+
+// ---------- tareas ----------
+
+.resumen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: espacio(1.5);
+
+  &__dato {
+    @include flex(column, flex-start, center, 2px);
+    background: $color-fondo;
+    border: 1px solid $color-borde;
+    border-radius: $radio * 0.6;
+    padding: espacio(1.5) espacio(2);
+
+    strong {
+      font-size: rem(22px);
+    }
+
+    small {
+      color: $color-texto-suave;
+      font-size: rem(12px);
+    }
+  }
+}
+
+.nueva-tarea {
+  @include flex(row, stretch, flex-start, espacio(1));
+}
+
+.filtros {
+  @include flex(row, center, flex-start, espacio(0.5));
+  border-bottom: 1px solid $color-borde;
+
+  &__boton {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: $color-texto-suave;
+    font-family: inherit;
+    font-size: rem(14px);
+    font-weight: 600;
+    padding: espacio(1) espacio(1.5);
+    margin-bottom: -1px;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-texto;
+    }
+
+    &--activo {
+      color: $color-primario;
+      border-bottom-color: $color-primario;
+    }
+  }
+}
+
+.lista-tareas {
+  list-style: none;
+  @include flex(column, stretch, flex-start, espacio(0.5));
+}
+
+.lista-vacia {
+  list-style: none;
+  color: $color-texto-suave;
+  font-size: rem(14px);
+  text-align: center;
+  padding: espacio(4) 0;
+}
+
+.tarea {
+  @include flex(row, center, flex-start, espacio(1.5));
+  @include fila-hover;
+  padding: espacio(1.25) espacio(1.5);
+
+  &__check {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: $color-primario;
+    cursor: pointer;
+  }
+
+  &__info {
+    @include flex(column, flex-start, center, 2px);
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__titulo {
+    font-weight: 600;
+    max-width: 100%;
+    @include texto-cortado;
+  }
+
+  &__fecha {
+    color: $color-texto-suave;
+    font-size: rem(12px);
+  }
+
+  &__edicion {
+    flex: 1;
+  }
+
+  &__acciones {
+    @include flex(row, center, flex-end, espacio(0.5));
+    opacity: 0;
+    transition: opacity 0.15s;
+
+    &--visibles {
+      opacity: 1;
+    }
+  }
+
+  &:hover &__acciones,
+  &:focus-within &__acciones {
+    opacity: 1;
+  }
+
+  &--completada &__titulo {
+    color: $color-texto-suave;
+    text-decoration: line-through;
+  }
+}
+
+// ---------- perfil ----------
+
+.foto {
+  @include flex(row, center, center);
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: $color-primario;
+  color: #fff;
+  font-weight: 800;
+  font-size: rem(14px);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &--grande {
+    width: 88px;
+    height: 88px;
+    font-size: rem(34px);
+    border: 3px solid $color-borde;
+  }
+}
+
+.perfil {
+  @include flex(row, center, flex-start, espacio(2));
+
+  &__datos {
+    @include flex(column, flex-start, center, espacio(0.5));
+    min-width: 0;
+
+    strong {
+      max-width: 100%;
+      @include texto-cortado;
+    }
+
+    .texto-suave {
+      margin-top: 0;
+      font-size: rem(13px);
+    }
+  }
+}
+
+.selector-archivo {
+  display: block;
+  border: 1px dashed $color-borde;
+  border-radius: $radio * 0.6;
+  padding: espacio(2);
+  text-align: center;
+  color: $color-texto-suave;
+  font-size: rem(14px);
+  cursor: pointer;
+  @include texto-cortado;
+  transition: border-color 0.15s, color 0.15s;
+
+  &:hover {
+    border-color: $color-primario;
+    color: $color-texto;
+  }
+
+  input {
+    display: none;
+  }
+}

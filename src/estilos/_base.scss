@@ -1,0 +1,88 @@
+@use 'variables' as *;
+@use 'funciones' as *;
+@use 'mixins' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(180deg, #dbe7fd 0%, $color-fondo 320px);
+  background-color: $color-fondo;
+  color: $color-texto;
+  font-family: $fuente;
+  min-height: 100vh;
+}
+
+.contenedor {
+  max-width: $ancho-contenido;
+  margin: 0 auto;
+  padding: espacio(4) espacio(2);
+}
+
+.barra {
+  @include flex(row, center, space-between, espacio(2));
+  max-width: $ancho-contenido + 160px;
+  min-height: 72px;
+  margin: 0 auto;
+  padding: espacio(2) espacio(3);
+
+  &__marca {
+    @include flex(row, center, flex-start, espacio(1));
+    color: $color-texto;
+    font-size: rem(18px);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  &__logo {
+    @include flex(row, center, center);
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: $color-primario;
+    color: #fff;
+    font-size: rem(15px);
+  }
+
+
+  &__menu {
+    @include flex(row, center, flex-end, espacio(1.5));
+  }
+
+  &__enlace {
+    color: $color-texto-suave;
+    font-size: rem(14px);
+    font-weight: 600;
+    text-decoration: none;
+    padding: espacio(0.75) espacio(1);
+    border-radius: $radio * 0.5;
+
+    &:hover,
+    &--activo {
+      color: $color-texto;
+    }
+  }
+
+  &__usuario {
+    @include flex(row, center, flex-start, espacio(1));
+    @include fila-hover;
+    color: $color-texto;
+    text-decoration: none;
+    padding: espacio(0.5) espacio(1);
+
+    &--activo {
+      background: $color-tarjeta-hover;
+    }
+  }
+
+  &__correo {
+    font-size: rem(14px);
+    max-width: 200px;
+    @include texto-cortado;
+  }
+}

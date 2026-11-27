@@ -1,0 +1,55 @@
+import { signal } from '@angular/core';
+import { AuthError, User } from '@supabase/supabase-js';
+import { supabase } from '../supabase.config';
+
+export function mensajeDeError(error: unknown): string {
+  const codigo = (error as AuthError | null)?.code;
+
+  switch (codigo) {
+    case 'invalid_credentials':
+      return 'Correo o contraseña incorrectos.';
+    case 'user_already_exists':
+    case 'email_exists':
+      return 'Ese correo ya está registrado.';
+    case 'weak_password':
+      return 'La contraseña debe tener al menos 6 caracteres.';
+    case 'email_address_invalid':
+    case 'validation_failed':
+      return 'El correo no es válido.';
+    case 'over_request_rate_limit':
+      return 'Demasiados intentos, espera un momento.';
+    default:
+      return 'Ocurrió un error. Intenta de nuevo.';
+  }
+}
+
+export function hookAutenticacion() {
+  const usuario = signal<User | null>(null);
+
+  // onAuthStateChange avisa de una vez con la sesion guardada (INITIAL_SESSION),
+  // asi los guards pueden esperar a que se sepa si hay usuario o no
+  const listo = new Promise<void>((resolver) => {
+    supabase.auth.onAuthStateChange((_evento, sesion) => {
+      usuario.set(sesion?.user ?? null);
+      resolver();
+    });
+  });
+
+  // como la confirmacion de correo esta apagada, al registrarse queda con la sesion abierta
+  async function registrar(correo: string, clave: string): Promise<void> {
+    const { error } = await supabase.auth.signUp({ email: correo, password: clave });
+    if (error) throw error;
+  }
+
+  async function iniciarSesion(correo: string, clave: string): Promise<void> {
+    const { error } = await supabase.auth.signInWithPassword({ email: correo, password: clave });
+    if (error) throw error;
+  }
+
+  async function cerrarSesion(): Promise<void> {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+  }
+
+  return { usuario, listo, registrar, iniciarSesion, cerrarSesion };
+}
