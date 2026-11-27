@@ -1,0 +1,126 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'funciones' as *;
+@use 'mixins' as *;
+
+.panel--grafo {
+  padding-bottom: espacio(1);
+}
+
+.leyenda {
+  @include flex(row, center, flex-end, espacio(2));
+  font-size: rem(13px);
+  color: $color-texto-suave;
+
+  &__item {
+    @include flex(row, center, flex-start, espacio(0.75));
+  }
+
+  &__punto {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+
+    &--ciudad {
+      background: $color-ciudad;
+    }
+
+    &--persona {
+      background: $color-persona;
+    }
+  }
+
+  &__ayuda {
+    padding-left: espacio(2);
+    border-left: 1px solid $color-borde;
+  }
+}
+
+.visor {
+  background-color: $color-suave;
+  background-image: radial-gradient(color.adjust($color-texto-suave, $alpha: -0.75) 1px, transparent 1px);
+  background-size: 22px 22px;
+  border-radius: $radio * 0.8;
+  overflow: hidden;
+
+  svg {
+    display: block;
+  }
+}
+
+.enlace {
+  stroke: color.adjust($color-texto-suave, $lightness: 25%);
+  stroke-width: 1.5;
+  transition: stroke 0.2s, opacity 0.2s;
+
+  &--activo {
+    stroke: $color-ciudad;
+    stroke-width: 2.5;
+  }
+
+  &--apagado {
+    opacity: 0.3;
+  }
+}
+
+.nodo {
+  cursor: grab;
+  transition: opacity 0.2s;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  circle {
+    stroke: #fff;
+    stroke-width: 3;
+    transition: stroke 0.2s;
+  }
+
+  &__inicial {
+    fill: #fff;
+    font-weight: 700;
+    font-size: rem(13px);
+    pointer-events: none;
+  }
+
+  &__nombre {
+    fill: $color-texto;
+    font-size: rem(12px);
+    font-weight: 600;
+    paint-order: stroke;
+    stroke: $color-suave;
+    stroke-width: 4px;
+    pointer-events: none;
+  }
+
+  &--persona circle {
+    fill: $color-persona;
+  }
+
+  &--ciudad {
+    cursor: pointer;
+
+    circle {
+      fill: $color-ciudad;
+    }
+
+    .nodo__inicial {
+      font-size: rem(16px);
+    }
+
+    .nodo__nombre {
+      font-size: rem(13px);
+      font-weight: 700;
+    }
+  }
+
+  &--seleccionado circle {
+    stroke: color.adjust($color-ciudad, $lightness: -15%);
+    stroke-width: 4;
+  }
+
+  &--apagado {
+    opacity: 0.25;
+  }
+}

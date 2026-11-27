@@ -1,0 +1,248 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'funciones' as *;
+@use 'mixins' as *;
+
+.panel {
+  @include panel;
+  @include flex(column, stretch, flex-start, espacio(2));
+
+  &__cabecera {
+    @include flex(row, center, space-between, espacio(2));
+  }
+
+  &__titulo {
+    font-size: rem(16px);
+    font-weight: 700;
+  }
+}
+
+.campo {
+  width: 100%;
+  min-width: 0;
+  background: $color-panel;
+  color: $color-texto;
+  border: 1px solid $color-borde;
+  border-radius: $radio * 0.8;
+  padding: espacio(1.1) espacio(1.5);
+  font-family: inherit;
+  font-size: rem(14px);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &::placeholder {
+    color: color.adjust($color-texto-suave, $lightness: 18%);
+  }
+
+  &:focus {
+    border-color: $color-persona;
+    box-shadow: 0 0 0 3px color.adjust($color-persona, $alpha: -0.86);
+  }
+
+  &--pequeno {
+    width: auto;
+    padding: espacio(0.5) espacio(1);
+    font-size: rem(13px);
+  }
+}
+
+.en-linea {
+  @include flex(row, stretch, flex-start, espacio(1));
+}
+
+.formulario {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: espacio(1);
+
+  &__completo {
+    grid-column: 1 / -1;
+  }
+}
+
+.boton {
+  @include boton;
+  white-space: nowrap;
+
+  &--ciudad {
+    @include boton($color-ciudad);
+  }
+}
+
+.boton-icono {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: $radio * 0.6;
+  background: transparent;
+  color: $color-texto-suave;
+  font-size: rem(13px);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover:not(:disabled) {
+    @include tinte($color-error);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.aviso {
+  font-size: rem(13px);
+  padding: espacio(1) espacio(1.25);
+  border-radius: $radio * 0.6;
+
+  &--ok {
+    @include tinte($color-exito, 0.9);
+  }
+
+  &--error {
+    @include tinte($color-error, 0.9);
+  }
+}
+
+.chip {
+  font-size: rem(12px);
+  font-weight: 700;
+  padding: 2px espacio(1.25);
+  border-radius: 500px;
+
+  &--ciudad {
+    @include tinte($color-ciudad, 0.85);
+  }
+}
+
+.vacio {
+  list-style: none;
+  color: $color-texto-suave;
+  font-size: rem(14px);
+  padding: espacio(1) 0;
+}
+
+.ciudades {
+  list-style: none;
+  @include flex(column, stretch, flex-start, 2px);
+
+  &__item {
+    @include flex(row, center, flex-start, espacio(1.25));
+    padding: espacio(0.75) espacio(1) espacio(0.75) espacio(1.25);
+    border-radius: $radio * 0.8;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &:hover {
+      background: $color-suave;
+    }
+
+    &--activa,
+    &--activa:hover {
+      background: color.adjust($color-ciudad, $alpha: -0.88);
+      border-color: color.adjust($color-ciudad, $alpha: -0.6);
+    }
+  }
+
+  &__punto {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: $color-ciudad;
+    flex-shrink: 0;
+  }
+
+  &__nombre {
+    flex: 1;
+    font-weight: 600;
+    @include texto-cortado;
+  }
+
+  &__conteo {
+    color: $color-texto-suave;
+    font-size: rem(12px);
+  }
+}
+
+.personas {
+  list-style: none;
+  @include flex(column, stretch, flex-start, espacio(0.5));
+
+  &__item {
+    @include flex(row, center, flex-start, espacio(1.25));
+    padding: espacio(0.75) espacio(1);
+    border-radius: $radio * 0.8;
+    transition: background 0.15s;
+
+    &:hover {
+      background: $color-suave;
+    }
+  }
+
+  &__inicial {
+    @include circulo(34px, $color-persona);
+    font-size: rem(14px);
+  }
+
+  &__info {
+    @include flex(column, flex-start, center, 1px);
+    flex: 1;
+    min-width: 0;
+
+    strong {
+      font-size: rem(14px);
+      max-width: 100%;
+      @include texto-cortado;
+    }
+
+    small {
+      color: $color-texto-suave;
+      font-size: rem(12px);
+    }
+  }
+}
+
+.adyacencia {
+  list-style: none;
+  @include flex(column, stretch, flex-start, 2px);
+  max-height: 340px;
+  overflow-y: auto;
+  font-family: Consolas, 'Cascadia Code', monospace;
+  font-size: rem(13px);
+
+  &__fila {
+    display: grid;
+    grid-template-columns: 150px 16px 1fr;
+    align-items: baseline;
+    padding: espacio(0.6) espacio(1);
+    border-radius: $radio * 0.6;
+
+    &--activa {
+      background: color.adjust($color-ciudad, $alpha: -0.88);
+    }
+  }
+
+  &__nodo {
+    font-weight: 700;
+    color: $color-persona;
+    @include texto-cortado;
+
+    &--ciudad {
+      color: color.adjust($color-ciudad, $lightness: -14%);
+    }
+  }
+
+  &__flecha {
+    color: $color-texto-suave;
+  }
+
+  &__vecinos {
+    color: $color-texto;
+
+    em {
+      color: $color-texto-suave;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+<header class="encabezado">
+  <div>
+    <h1 class="encabezado__titulo">Personas y ciudades</h1>
+  </div>
+
+  <div class="resumen">
+    <div class="resumen__dato">
+      <strong>{{ servicio.ciudades().length }}</strong>
+      <small>Ciudades</small>
+    </div>
+    <div class="resumen__dato">
+      <strong>{{ servicio.totalPersonas() }}</strong>
+      <small>Personas</small>
+    </div>
+    <div class="resumen__dato">
+      <strong>{{ servicio.aristas().length }}</strong>
+      <small>Aristas</small>
+    </div>
+  </div>
+</header>
+
+<main class="tablero">
+  <aside class="tablero__lateral">
+    <app-formulario-ciudad />
+    <app-formulario-persona />
+    <app-ciudades />
+  </aside>
+
+  <div class="tablero__principal">
+    <app-visor-grafo
+      [nodos]="servicio.nodos()"
+      [aristas]="servicio.aristas()"
+      [seleccionada]="servicio.ciudadSeleccionada()"
+      (elegirCiudad)="servicio.seleccionarCiudad($event)"
+    />
+
+    <div class="tablero__fila">
+      <app-personas />
+      <app-adyacencia />
+    </div>
+  </div>
+</main>
