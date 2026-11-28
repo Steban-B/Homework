@@ -1,0 +1,10 @@
+@use 'sass:math';
+@use 'variables' as *;
+
+@function espacio($veces) {
+  @return $espacio * $veces;
+}
+
+@function rem($px) {
+  @return math.div($px, 16px) * 1rem;
+}

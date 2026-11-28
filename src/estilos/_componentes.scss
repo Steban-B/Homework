@@ -1,0 +1,275 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'funciones' as *;
+@use 'mixins' as *;
+
+.panel {
+  @include panel;
+  @include flex(column, stretch, flex-start, espacio(2));
+
+  &__cabecera {
+    @include flex(row, baseline, space-between, espacio(2));
+  }
+
+  &__titulo {
+    font-size: rem(18px);
+    font-weight: 700;
+  }
+
+  &__nota {
+    color: $color-texto-suave;
+    font-size: rem(13px);
+  }
+}
+
+.pila {
+  @include flex(column, stretch, flex-start, espacio(1.25));
+}
+
+.campo {
+  width: 100%;
+  background: $color-panel;
+  color: $color-texto;
+  border: 1px solid $color-borde;
+  border-radius: $radio * 0.7;
+  padding: espacio(1.25) espacio(1.5);
+  font-family: inherit;
+  font-size: rem(14px);
+  outline: none;
+  transition: border-color 0.15s;
+
+  &::placeholder {
+    color: color.adjust($color-texto-suave, $lightness: 20%);
+  }
+
+  &:focus {
+    border-color: $color-primario;
+  }
+}
+
+.deslizador {
+  @include flex(column, stretch, flex-start, espacio(0.75));
+  font-size: rem(14px);
+  color: $color-texto-suave;
+
+  &__fila {
+    @include flex(row, center, space-between);
+
+    strong {
+      color: $color-primario;
+      font-size: rem(16px);
+    }
+  }
+
+  input {
+    accent-color: $color-primario;
+    cursor: pointer;
+  }
+}
+
+.boton {
+  @include boton;
+}
+
+.aviso {
+  font-size: rem(13px);
+  padding: espacio(1) espacio(1.5);
+  border-radius: $radio * 0.6;
+
+  &--ok {
+    @include tinte($color-exito);
+  }
+
+  &--error {
+    @include tinte($color-error);
+  }
+}
+
+.vacio {
+  list-style: none;
+  color: $color-texto-suave;
+  font-size: rem(14px);
+  padding: espacio(1) 0;
+}
+
+.ranking {
+  list-style: none;
+  @include flex(column, stretch, flex-start, espacio(1));
+
+  &__item {
+    display: grid;
+    grid-template-columns: 36px 1fr 200px 32px;
+    align-items: center;
+    gap: espacio(1.5);
+    padding: espacio(1.25) espacio(1.5);
+    border: 1px solid $color-borde;
+    border-radius: $radio * 0.8;
+    transition: border-color 0.15s;
+
+    &:hover {
+      border-color: color.adjust($color-primario, $alpha: -0.5);
+    }
+
+    &--podio .ranking__posicion {
+      background: $color-podio;
+      color: #fff;
+    }
+  }
+
+  &__posicion {
+    @include flex(row, center, center);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: $color-suave;
+    font-weight: 800;
+    font-size: rem(14px);
+  }
+
+  &__info {
+    @include flex(column, flex-start, center, 2px);
+    min-width: 0;
+
+    strong {
+      font-size: rem(16px);
+      max-width: 100%;
+      @include texto-cortado;
+    }
+
+    mark {
+      background: $color-resaltado;
+      color: color.adjust($color-primario, $lightness: -12%);
+      border-radius: 3px;
+    }
+  }
+
+  &__puntos {
+    font-family: $fuente-mono;
+    font-weight: 700;
+    text-align: right;
+  }
+}
+
+.barra {
+  height: 8px;
+  background: $color-suave;
+  border-radius: 500px;
+  overflow: hidden;
+
+  &__relleno {
+    height: 100%;
+    background: $color-primario;
+    border-radius: 500px;
+    transition: width 0.3s;
+  }
+}
+
+.arbol {
+  @include flex(column, stretch, flex-start, espacio(1.5));
+  background: $color-suave;
+  border-radius: $radio * 0.8;
+  padding: espacio(2.5) espacio(1);
+
+  &__nivel {
+    display: flex;
+    justify-content: space-around;
+    gap: espacio(1);
+
+    > * {
+      flex: 1 1 0;
+    }
+  }
+
+  &__nodo {
+    @include flex(column, center, center, 2px);
+    min-width: 0;
+    max-width: 130px;
+    flex: 1;
+    background: $color-panel;
+    border: 2px solid $color-borde;
+    border-radius: $radio * 0.7;
+    padding: espacio(0.75) espacio(1);
+
+    strong {
+      font-family: $fuente-mono;
+      font-size: rem(18px);
+    }
+
+    small {
+      color: $color-texto-suave;
+      font-size: rem(11px);
+      max-width: 100%;
+      @include texto-cortado;
+    }
+
+    &--raiz {
+      border-color: $color-primario;
+      background: $color-resaltado;
+    }
+  }
+
+  &__hueco {
+    flex: 1;
+    max-width: 130px;
+  }
+}
+
+.arreglo {
+  @include flex(row, stretch, flex-start, 0);
+  flex-wrap: wrap;
+
+  &__celda {
+    @include flex(column, center, center, 2px);
+    width: 56px;
+    border: 1px solid $color-borde;
+    margin-left: -1px;
+    padding: espacio(0.75) 0;
+    background: $color-panel;
+
+    &:first-child {
+      margin-left: 0;
+      border-radius: $radio * 0.6 0 0 $radio * 0.6;
+    }
+
+    &:last-child {
+      border-radius: 0 $radio * 0.6 $radio * 0.6 0;
+    }
+  }
+
+  &__indice {
+    font-size: rem(10px);
+    color: $color-texto-suave;
+  }
+
+  &__valor {
+    font-family: $fuente-mono;
+    font-weight: 700;
+  }
+}
+
+.catalogo {
+  list-style: none;
+  @include flex(column, stretch, flex-start, 1px);
+
+  &__item {
+    @include flex(row, center, space-between, espacio(1));
+    padding: espacio(0.9) espacio(1.25);
+    border-radius: $radio * 0.6;
+    cursor: pointer;
+    font-size: rem(14px);
+
+    &:hover {
+      background: $color-suave;
+    }
+  }
+
+  &__nombre {
+    @include texto-cortado;
+  }
+
+  &__puntos {
+    font-family: $fuente-mono;
+    font-size: rem(13px);
+    color: $color-texto-suave;
+  }
+}

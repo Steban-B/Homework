@@ -1,0 +1,122 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'funciones' as *;
+@use 'mixins' as *;
+
+.buscador {
+  @include flex(column, stretch, flex-start, espacio(1.5));
+  max-width: 760px;
+  margin: 0 auto;
+
+  &__caja {
+    @include flex(row, center, flex-start, espacio(1.5));
+    background: $color-panel;
+    border: 2px solid $color-borde;
+    border-radius: 500px;
+    padding: espacio(0.5) espacio(1) espacio(0.5) espacio(2.5);
+    box-shadow: $sombra;
+    transition: border-color 0.15s, box-shadow 0.15s;
+
+    &:focus-within {
+      border-color: $color-primario;
+      box-shadow: 0 0 0 4px color.adjust($color-primario, $alpha: -0.85);
+    }
+  }
+
+  &__icono {
+    font-size: rem(24px);
+    color: $color-texto-suave;
+    line-height: 1;
+  }
+
+  &__campo {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: $color-texto;
+    font-family: inherit;
+    font-size: rem(18px);
+    padding: espacio(1.5) 0;
+
+    &::placeholder {
+      color: color.adjust($color-texto-suave, $lightness: 20%);
+    }
+  }
+
+  &__limpiar {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: $color-suave;
+    color: $color-texto-suave;
+    cursor: pointer;
+
+    &:hover {
+      background: $color-borde;
+      color: $color-texto;
+    }
+  }
+
+  &__opciones {
+    @include flex(row, center, space-between, espacio(2));
+    padding: 0 espacio(1.5);
+  }
+
+  &__info {
+    @include flex(row, center, flex-end, espacio(0.75));
+    color: $color-texto-suave;
+    font-size: rem(14px);
+
+    strong {
+      color: $color-texto;
+    }
+  }
+}
+
+.segmentos {
+  @include flex(row, center, flex-start, 2px);
+  background: $color-suave;
+  border: 1px solid $color-borde;
+  border-radius: 500px;
+  padding: 3px;
+
+  &__etiqueta {
+    font-size: rem(12px);
+    font-weight: 700;
+    color: $color-texto-suave;
+    padding: 0 espacio(1.25) 0 espacio(1);
+  }
+
+  &__boton {
+    min-width: 36px;
+    border: none;
+    border-radius: 500px;
+    background: transparent;
+    color: $color-texto-suave;
+    font-family: inherit;
+    font-size: rem(13px);
+    font-weight: 700;
+    padding: espacio(0.6) espacio(1.25);
+    cursor: pointer;
+
+    &:hover {
+      color: $color-texto;
+    }
+
+    &--activo,
+    &--activo:hover {
+      background: $color-primario;
+      color: #fff;
+    }
+  }
+}
+
+.insignia {
+  @include tinte($color-primario, 0.88);
+  font-size: rem(12px);
+  font-weight: 600;
+  padding: 2px espacio(1);
+  border-radius: 500px;
+}
