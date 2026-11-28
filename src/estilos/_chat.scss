@@ -1,0 +1,219 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'funciones' as *;
+@use 'mixins' as *;
+
+.encabezado {
+  @include flex(row, center, flex-start, espacio(1.5));
+  padding: espacio(1.75) espacio(2.5);
+  border-bottom: 1px solid $color-borde;
+
+  &__avatar {
+    @include circulo(42px, $color-primario);
+    font-size: rem(18px);
+  }
+
+  &__info {
+    @include flex(column, flex-start, center, 1px);
+    flex: 1;
+
+    strong {
+      font-size: rem(16px);
+    }
+
+    small {
+      color: $color-texto-suave;
+      font-size: rem(13px);
+    }
+  }
+
+  &__estado--escribiendo {
+    color: $color-primario !important;
+    font-style: italic;
+  }
+
+  &__marca {
+    font-size: rem(11px);
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: $color-texto-suave;
+    text-transform: uppercase;
+  }
+}
+
+.conversacion {
+  @include flex(column, stretch, flex-start, espacio(2));
+  background: $color-chat;
+  padding: espacio(3);
+  overflow-y: auto;
+  height: 100%;
+}
+
+.inicio {
+  @include flex(column, center, center, espacio(1.5));
+  margin: auto;
+  color: $color-texto-suave;
+  text-align: center;
+
+  &__icono {
+    @include circulo(56px, $color-primario-claro);
+    color: $color-primario;
+    font-size: rem(24px);
+  }
+}
+
+.mensaje {
+  @include flex(column, flex-start, flex-start, espacio(0.75));
+  max-width: 70%;
+
+  &--usuario {
+    align-self: flex-end;
+    align-items: flex-end;
+  }
+
+  &--bot {
+    align-self: flex-start;
+  }
+
+  &__busqueda {
+    @include pildora;
+    background: $color-primario;
+    color: #fff;
+    font-size: rem(14px);
+    font-weight: 600;
+  }
+
+  &__gif {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: $radio * 0.8;
+    border: 4px solid $color-ventana;
+    box-shadow: 0 4px 14px rgba(30, 27, 46, 0.1);
+  }
+
+  &__cargando {
+    width: 240px;
+    height: 180px;
+    border-radius: $radio * 0.8;
+    background: linear-gradient(90deg, $color-suave 0%, color.adjust($color-suave, $lightness: 3%) 50%, $color-suave 100%);
+    background-size: 200% 100%;
+    animation: brillo 1.2s linear infinite;
+  }
+
+  &__sticker {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    max-height: 180px;
+    width: auto;
+  }
+
+  &__texto {
+    background: $color-ventana;
+    border: 1px solid $color-borde;
+    border-radius: $radio * 0.8;
+    padding: espacio(1.25) espacio(1.75);
+    font-size: rem(14px);
+    line-height: 1.4;
+  }
+
+  &__hora {
+    font-size: rem(11px);
+    color: $color-texto-suave;
+    padding: 0 espacio(0.5);
+  }
+}
+
+.escribiendo {
+  @include flex(row, center, flex-start, 5px);
+  align-self: flex-start;
+  background: $color-ventana;
+  border: 1px solid $color-borde;
+  border-radius: 500px;
+  padding: espacio(1.5) espacio(2);
+
+  span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $color-texto-suave;
+    animation: rebote 1.2s infinite ease-in-out;
+
+    &:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+}
+
+.barra {
+  @include flex(row, center, flex-start, espacio(1.25));
+  padding: espacio(1.75) espacio(2.5);
+  border-top: 1px solid $color-borde;
+  background: $color-ventana;
+
+  &__campo {
+    flex: 1;
+    @include pildora;
+    padding: espacio(1.5) espacio(2.25);
+    background: $color-suave;
+    border: 1px solid transparent;
+    color: $color-texto;
+    font-family: inherit;
+    font-size: rem(15px);
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+
+    &::placeholder {
+      color: $color-texto-suave;
+    }
+
+    &:focus {
+      background: $color-ventana;
+      border-color: $color-primario;
+    }
+  }
+
+  &__boton {
+    @include circulo(46px, $color-primario);
+    border: none;
+    font-size: rem(17px);
+    cursor: pointer;
+    transition: background 0.15s, opacity 0.15s;
+
+    &:hover:not(:disabled) {
+      background: color.adjust($color-primario, $lightness: -8%);
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+  }
+}
+
+@keyframes rebote {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@keyframes brillo {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}

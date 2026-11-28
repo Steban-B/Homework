@@ -1,0 +1,46 @@
+@use 'variables' as *;
+@use 'funciones' as *;
+@use 'mixins' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: $color-fondo;
+  color: $color-texto;
+  font-family: $fuente;
+  min-width: 900px;
+}
+
+.ventana {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: $ancho-ventana;
+  height: calc(100vh - #{espacio(6)});
+  margin: espacio(3) auto;
+  background: $color-ventana;
+  border: 1px solid $color-borde;
+  border-radius: $radio;
+  box-shadow: $sombra;
+  overflow: hidden;
+}
+
+app-encabezado,
+app-barra {
+  display: block;
+}
+
+app-conversacion {
+  display: block;
+  min-height: 0;
+}
+
+app-mensaje {
+  display: flex;
+  flex-direction: column;
+}
